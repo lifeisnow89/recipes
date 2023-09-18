@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
+    <title>New</title>
+</head>
+<body>
+    <h1 class="text-left">Can't wait to see this {{session['first_name']}} {{session['user_id']}} !!!</h1>
+    <h1 class="text-center">Add a recipe!</h1>
+    <form class="col-4 mx-auto bg-dark text-white border-2 rounded p-2 mt-4" action="/create/recipe" method="post"> 
+        {% with messages = get_flashed_messages() %}
+                {% if messages %} 
+                    {% for message in messages %}           
+                        <p>{{message}}</p>                   
+                    {% endfor %}
+                {% endif %}
+            {% endwith %}
+        <div class="form-group">
+            <label for="exampleFormControlInput1">Name</label>
+            <input type="text" name="name" class="form-control" id="exampleFormControlInput1" placeholder="Name">
+        </div>
+        <div class="input-group mb-3">
+            <div class="form-group">
+                <label for="exampleFormControlInput1">Date Cooked/Made</label>
+                <input type="date" name="date" class="form-control" id="exampleFormControlInput1" placeholder="Month xx Day 00 Year 0000">
+            </div>
+            </div>
+        <div class="form-group">
+            <label for="exampleFormControlTextarea1">Description</label>
+            <textarea class="form-control" name="description" id="exampleFormControlTextarea1" rows="3"></textarea>
+        </div>
+        <div class="form-group">
+            <label for="exampleFormControlTextarea1">Instructions</label>
+            <textarea class="form-control" name="instructions" id="exampleFormControlTextarea1" rows="3"></textarea>
+        </div>
+        <div class="col-4">
+            <div class="form-group">
+                <label for="under30">Under 30 Min?</label>
+                <div class="input-group-text bg-dark">
+                    <input type="radio" name="under30" value="0" class="form-control">
+                    <label for="0" class="text-warning">No</label>
+                </div>
+                <div class="input-group-text bg-dark">
+                    <input type="radio" name="under30" value="1" class="form-control">
+                    <label for="1" class="text-warning">Yes</label>
+                </div>
+            </div>
+        </div>
+        <input type="hidden" name="users_id" value="{{ session['user_id'] }}">
+        <button class="btn btn-primary">Submit</button>
+        </form>
+        <a href="/recipes" method="post">Recipes</a>
+        <a href="/logout">Logout</a>
+</body>
+</html>
